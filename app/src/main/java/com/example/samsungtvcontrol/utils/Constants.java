@@ -9,7 +9,7 @@ public class Constants {
     public static String SERVER = "localhost:5000/execute-text";
     public static String payloadControl = "{\"method\": \"ms.remote.control\", \"params\": {\"Cmd\": \"{{cmd}}\", \"DataOfCmd\": \"{{DataOfCmd}}\", \"Option\": \"false\", \"TypeOfRemote\": \"SendRemoteKey\"}}";
     public static String payloadRunapp = "{\"method\": \"ms.channel.emit\", \"params\": {\"event\": \"ed.apps.launch\", \"to\": \"host\", \"data\": {\"action_type\": \"{{action_type}}\", \"appId\": \"{{appId}}\", \"metaTag\": \"{{metaTag}}\"}}}";
-    public static String payloadCursor = "{\"method\": \"ms.remote.control\", \"params\": {\"Cmd\": \"move\", \"Position\": {\"x\": \"{{x}}\", \"y\": \"{{y}}\", \"Time\": \"{{duration}}\"}, \"TypeOfRemote\": \"ProcessMouseDevice\"}}";
+    public static String payloadCursor = "{\"method\": \"ms.remote.control\", \"params\": {\"Cmd\": \"move\", \"Position\": {\"x\": {{x}}, \"y\": {{y}}, \"Time\": {{duration}}}, \"TypeOfRemote\": \"ProcessMouseDevice\"}}";
     public static String payloadAppList = "{\"method\": \"ms.channel.emit\", \"params\": {\"event\": \"ed.installedApp.get\", \"to\": \"host\"}}";
     public static String SSL_URI = "wss://{{host}}:8002/api/v2/channels/samsung.remote.control?name=U2Ftc3VuZ1R2UmVtb3Rl&token={{token}}";
     public static String URI = "ws://{host}:{port}/api/v2/channels/samsung.remote.control?name={name}";

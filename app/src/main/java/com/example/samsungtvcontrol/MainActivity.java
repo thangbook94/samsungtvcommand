@@ -2,14 +2,12 @@ package com.example.samsungtvcontrol;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SimpleAdapter;
@@ -20,8 +18,8 @@ import androidx.mediarouter.media.MediaRouteSelector;
 import androidx.mediarouter.media.MediaRouter;
 
 import com.example.samsungtvcontrol.tvcommand.SearchListener;
-import com.example.samsungtvcontrol.tvcommand.ServiceListAdapter;
 import com.example.samsungtvcontrol.utils.Constants;
+import com.example.samsungtvcontrol.utils.Keycode;
 import com.example.samsungtvcontrol.utils.SamsungWebsocket;
 import com.samsung.multiscreen.Application;
 import com.samsung.multiscreen.Search;
@@ -56,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        editText = (EditText) findViewById(R.id.sendText);
+        editText = findViewById(R.id.sendText);
         button = findViewById(R.id.button);
-        List<Service> listService = new ArrayList<>();
-        ServiceListAdapter serviceListAdapter = new ServiceListAdapter(listService, this);
+        editText.setEnabled(false);
+        editText.setClickable(false);
         editText.setOnClickListener(view -> promptSpeechInput());
 
 
@@ -69,12 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_2,
                 new String[]{"name", "type"},
                 new int[]{android.R.id.text1, android.R.id.text2});
-        button.setOnClickListener(new View.OnClickListener() {
-                                      @Override
-                                      public void onClick(View v) {
-                                          CreateSearchTvDialog();
-                                      }
-                                  }
+        button.setOnClickListener(v -> CreateSearchTvDialog()
         );
 
     }
@@ -107,10 +100,13 @@ public class MainActivity extends AppCompatActivity {
                     final String text = result.get(0);
                     editText.setText(text);
                     editText.setGravity(Gravity.CENTER);
-                    SamsungWebsocket samsungWebsocket = new SamsungWebsocket("192.168.1.122", "[Samsung tv 7 series]");
-//                    samsungWebsocket.sendKey(Keycode.KEY_VOLUP.toString(), 1, "Click");
+                    SamsungWebsocket samsungWebsocket = new SamsungWebsocket(ip, name);
+                    samsungWebsocket.sendKey(Keycode.KEY_VOLUP.toString(), 1, "Click");
 //                    samsungWebsocket.openBrowser("google.com.vn");
-                    samsungWebsocket.runApp(Constants.mapApp.get("Youtube"), Constants.DEEP_LINK, Constants.YOUTUBE_WATCH_PREFIX + "PkSxlSsOAgw");
+                    samsungWebsocket.runApp(Constants.mapApp.get("Youtube"), Constants.DEEP_LINK, Constants.YOUTUBE_WATCH_PREFIX + "vTJdVE_gjI0");
+                    samsungWebsocket.sendKey(Keycode.KEY_ENTER.toString(), 1, "Click");
+
+
 //                    OkHttpClient client = new OkHttpClient();
 //                    Request request = new Request.Builder()
 //                            .url("localhost:5000/execute-text").addHeader("Text", text)
@@ -128,40 +124,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-//    public boolean startDiscovery(SearchListener searchListener) {
-//        if (!search.isSearching()) {
-//            if (searchListener != null) {
-//                this.searchListener = searchListener;
-//                search.setOnStartListener(searchListener);
-//                search.setOnStopListener(searchListener);
-//            }
-//            search.start();
-//
-//            startTimer(10000);
-//
-//        }
-//        return false;
-//    }
-
-//    private void startTimer(long millis) {
-//        new CountDownTimer(millis, 250) {
-//
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                Log.d(TAG, "Timer finished. Call completeScan()");
-//                cancel();
-//               if (search != null) {
-//            search.stop();
-//            search = null;
-//        }
-//            }
-//        }.start();
-//    }
 
     @Override
     protected void onDestroy() {
@@ -215,81 +177,23 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        // You can connect getByURI,getById
-        // This is example code.
-        /*
-        Service.getByURI(Uri.parse("http://192.168.0.68:8001/api/v2/"), new Result<Service>() {
-            @Override
-            public void onSuccess(Service service) {
-                mService = service;
-                mApplication = mService.createApplication(mApplicationId, mChannelId);
-                addAllListener(mApplication);
-                mApplication.connect(new Result<Client>() {
-                    @Override
-                    public void onSuccess(Client client) {
-                        mApplication.setDebug(true);
-                        Log.d(TAG, "application.connect onSuccess " + client.toString());
-                    }
-
-                    @Override
-                    public void onError(com.samsung.multiscreen.Error error) {
-                        Log.d(TAG, "application.connect onError " + error.toString());
-                        Toast.makeText(mContext, "Launch TV app error occurs : " + error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-
-            @Override
-            public void onError(Error error) {
-                Log.d(TAG, "Service.getById  onError : ");
-            }
-        });
-
-        Service.getById(mContext, "uuid:8304f069-639d-41a7-afcd-6bf8160dd88e", new Result<Service>() {
-            @Override
-            public void onSuccess(Service service) {
-                mService = service;
-                mApplication = mService.createApplication(mApplicationId, mChannelId);
-                addAllListener(mApplication);
-                mApplication.connect(new Result<Client>() {
-                    @Override
-                    public void onSuccess(Client client) {
-                        mApplication.setDebug(true);
-                        Log.d(TAG, "application.connect onSuccess " + client.toString());
-                    }
-
-                    @Override
-                    public void onError(com.samsung.multiscreen.Error error) {
-                        Log.d(TAG, "application.connect onError " + error.toString());
-                        Toast.makeText(mContext, "Launch TV app error occurs : " + error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-
-            @Override
-            public void onError(Error error) {
-                Log.d(TAG, "Service.getById  onError : ");
-            }
-        });
-        */
-
         alertBuilder.setAdapter(mTVListAdapter,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        search.stop();
-                        // End media router discovery
-                        mMediaRouter.removeCallback(mMediaRouterCallback);
-                        //Save Service
-                        String cName = mDeviceList.get(which).getClass().getName();
-                        Service service = (Service) mDeviceList.get(which);
-                        Uri uri = service.getUri();
-                        ip = uri.getHost();
-                        editText.setEnabled(true);
-                        name = service.getName();
-                        Log.d(TAG, "cName : " + cName);
-                        Log.d(TAG, "mService : " + Service.class.getName());
-                    }
+                (dialog, which) -> {
+                    search.stop();
+                    // End media router discovery
+//                        mMediaRouter.removeCallback(mMediaRouterCallback);
+                    //Save Service
+                    String cName = mDeviceList.get(which).getClass().getName();
+                    Service service = (Service) mDeviceList.get(which);
+                    Uri uri = service.getUri();
+                    ip = uri.getHost();
+                    editText.setEnabled(true);
+                    editText.setClickable(true);
+                    name = service.getName();
+                    System.out.println(ip + " XXXXXXXX " + name);
+                    System.out.println(service.toString());
+                    Log.d(TAG, "cName : " + cName);
+                    Log.d(TAG, "mService : " + Service.class.getName());
                 });
 
         alertBuilder.show();

@@ -175,6 +175,11 @@ public class SamsungWebsocket {
         payload = payload.replace("{{cmd}}", cmd);
         payload = payload.replace("{{DataOfCmd}}", key);
         for (int i = 0; i < times; i++) {
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             ws.send(payload);
         }
     }
