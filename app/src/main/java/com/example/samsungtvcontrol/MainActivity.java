@@ -21,6 +21,7 @@ import com.example.samsungtvcontrol.tvcommand.SearchListener;
 import com.example.samsungtvcontrol.utils.Constants;
 import com.example.samsungtvcontrol.utils.Keycode;
 import com.example.samsungtvcontrol.utils.SamsungWebsocket;
+import com.example.samsungtvcontrol.utils.YoutubeService;
 import com.samsung.multiscreen.Application;
 import com.samsung.multiscreen.Search;
 import com.samsung.multiscreen.Service;
@@ -102,10 +103,9 @@ public class MainActivity extends AppCompatActivity {
                     editText.setGravity(Gravity.CENTER);
                     SamsungWebsocket samsungWebsocket = new SamsungWebsocket(ip, name);
                     samsungWebsocket.sendKey(Keycode.KEY_VOLUP.toString(), 1, "Click");
-//                    samsungWebsocket.openBrowser("google.com.vn");
-                    samsungWebsocket.runApp(Constants.mapApp.get("Youtube"), Constants.DEEP_LINK, Constants.YOUTUBE_WATCH_PREFIX + "vTJdVE_gjI0");
-                    samsungWebsocket.sendKey(Keycode.KEY_ENTER.toString(), 1, "Click");
-
+//                    samsungWebsocket.runApp(Constants.mapApp.get("Youtube"), Constants.DEEP_LINK, Constants.YOUTUBE_WATCH_PREFIX + "vTJdVE_gjI0");
+//                    samsungWebsocket.sendKey(Keycode.KEY_ENTER.toString(), 1, "Click");
+                    YoutubeService.openVideo(samsungWebsocket,"Di ve nha");
 
 //                    OkHttpClient client = new OkHttpClient();
 //                    Request request = new Request.Builder()
