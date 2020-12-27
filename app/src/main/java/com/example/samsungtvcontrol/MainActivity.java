@@ -274,10 +274,9 @@ public class MainActivity extends AppCompatActivity {
                     final String text = result.get(0);
                     editText.setText(text);
                     editText.setGravity(Gravity.CENTER);
-                    samsungWebsocket.sendKey(Keycode.KEY_VOLUP.toString(), 1, Constants.CLICK);
 //                    samsungWebsocket.runApp(Constants.mapApp.get("Youtube"), Constants.DEEP_LINK, Constants.YOUTUBE_WATCH_PREFIX + "vTJdVE_gjI0");
 //                    samsungWebsocket.sendKey(Keycode.KEY_ENTER.toString(), 1, "Click");
-                    YoutubeService.openVideo(samsungWebsocket, "Di ve nha");
+                    YoutubeService.openVideo(samsungWebsocket, text);
 //                    GoogleService.searchAndOpen(samsungWebsocket, "Di ve nha");
 //                    OkHttpClient client = new OkHttpClient();
 //                    Request request = new Request.Builder()

@@ -20,6 +20,11 @@ public class YoutubeService {
             return;
         }
         samsungWebsocket.runApp(Constants.mapApp.get("Youtube"), Constants.DEEP_LINK, Constants.YOUTUBE_WATCH_PREFIX + result.get(0));
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         samsungWebsocket.sendKey(Keycode.KEY_ENTER.toString(), 1, "Click");
     }
 
