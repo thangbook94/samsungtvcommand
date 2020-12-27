@@ -169,7 +169,7 @@ public class SamsungWebsocket {
                 super.onFailure(webSocket, t, response);
             }
         };
-        ws = okHttpClient.newWebSocket(request, webSocketListener);
+        if (ws == null) ws = okHttpClient.newWebSocket(request, webSocketListener);
         cmd = cmd == null ? "Click" : cmd;
         String payload = Constants.payloadControl;
         payload = payload.replace("{{cmd}}", cmd);

@@ -4,6 +4,10 @@ import java.util.HashMap;
 
 public class Constants {
 
+    public static final String CLICK = "Click";
+    public static final String YOUTUBE = "Youtube";
+    public static final String NETFLIX = "Netflix";
+    public static final String BROWSER = "Browser";
     public static String NATIVE_LAUNCH = "NATIVE_LAUNCH";
     public static String DEEP_LINK = "DEEP_LINK";
     public static String SERVER = "localhost:5000/execute-text";
