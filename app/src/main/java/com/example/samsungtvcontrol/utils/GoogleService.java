@@ -13,6 +13,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class GoogleService {
+    public static void searchAndOpen(SamsungWebsocket samsungWebsocket, String search) {
+        List<String> re = getResult(search);
+        if (re.isEmpty() || re.size() == 0) {
+            return;
+        }
+        samsungWebsocket.openBrowser(re.get(0));
+    }
+
     public static List<String> getResult(String search) {
         List<String> re = new ArrayList<>();
         OkHttpClient okHttpClient = new OkHttpClient();

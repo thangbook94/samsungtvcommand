@@ -158,6 +158,7 @@ public class SamsungWebsocket {
         payload = payload.replace("{{action_type}}", appType);
         payload = payload.replace("{{metaTag}}", metaTag);
         ws.send(payload);
+        ws = okHttpClient.newWebSocket(request, webSocketListener);
     }
 
     public void openBrowser(String url) {

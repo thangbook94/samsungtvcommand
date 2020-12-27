@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.Gravity;
@@ -58,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+
         sharedPreferences = this.getSharedPreferences("tvSetting", Context.MODE_PRIVATE);
         String ipShared = sharedPreferences.getString("ip", null);
         System.out.println("IP: " + ip + " " + ipShared);
@@ -199,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         });
         browser.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.runApp(Constants.mapApp.get(Constants.BROWSER), Constants.NATIVE_LAUNCH, "");
+                samsungWebsocket.runApp(Constants.mapApp.get(Constants.BROWSER), Constants.DEEP_LINK, "");
             }
         });
         chup.setOnClickListener(view -> {
@@ -271,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
 //                    samsungWebsocket.runApp(Constants.mapApp.get("Youtube"), Constants.DEEP_LINK, Constants.YOUTUBE_WATCH_PREFIX + "vTJdVE_gjI0");
 //                    samsungWebsocket.sendKey(Keycode.KEY_ENTER.toString(), 1, "Click");
                     YoutubeService.openVideo(samsungWebsocket, "Di ve nha");
-
+//                    GoogleService.searchAndOpen(samsungWebsocket, "Di ve nha");
 //                    OkHttpClient client = new OkHttpClient();
 //                    Request request = new Request.Builder()
 //                            .url("localhost:5000/execute-text").addHeader("Text", text)
