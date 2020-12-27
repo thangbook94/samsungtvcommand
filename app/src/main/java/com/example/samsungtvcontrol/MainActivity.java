@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,16 +34,11 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static Search search;
-    private List<Map<String, String>> mDeviceInfos = new ArrayList<>();
-    private SearchListener searchListener;
     private final int REQ_CODE_SPEECH_INPUT = 100;
     EditText editText;
     String ip;
     String name;
     Button button;
-    private String TAG = "Command-Samsung-Tv";
-    private ArrayList mDeviceList = new ArrayList();
-    private SimpleAdapter mTVListAdapter;
     Button number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
     Button buttonUp, buttonRigh, buttonLeft, buttonDown, buttonOk;
     Button power, source;
@@ -53,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
     Button buttonback;
     SamsungWebsocket samsungWebsocket;
     SharedPreferences sharedPreferences;
+    private List<Map<String, String>> mDeviceInfos = new ArrayList<>();
+    private SearchListener searchListener;
+    private String TAG = "Command-Samsung-Tv";
+    private ArrayList mDeviceList = new ArrayList();
+    private SimpleAdapter mTVListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

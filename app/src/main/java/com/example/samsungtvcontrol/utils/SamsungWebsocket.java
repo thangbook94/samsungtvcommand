@@ -6,12 +6,9 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -43,12 +40,12 @@ public class SamsungWebsocket {
                     new X509TrustManager() {
                         @Override
                         public void checkClientTrusted(X509Certificate[] chain,
-                                                       String authType) throws CertificateException {
+                                                       String authType) {
                         }
 
                         @Override
                         public void checkServerTrusted(X509Certificate[] chain,
-                                                       String authType) throws CertificateException {
+                                                       String authType) {
                         }
 
                         @Override
@@ -63,12 +60,7 @@ public class SamsungWebsocket {
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
             okHttpClient = new OkHttpClient.Builder()
                     .sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0])
-                    .hostnameVerifier(new HostnameVerifier() {
-                        @Override
-                        public boolean verify(String hostname, SSLSession session) {
-                            return true;
-                        }
-                    }).build();
+                    .hostnameVerifier((hostname, session) -> true).build();
             request = new Request.Builder().url(URI).build();
             webSocketListener = new WebSocketListener() {
                 @Override
@@ -80,7 +72,6 @@ public class SamsungWebsocket {
                 @Override
                 public void onMessage(WebSocket webSocket, String text) {
                     super.onMessage(webSocket, text);
-                    System.out.println("XXXXXXXXX" + text);
                     try {
                         JSONObject jsonObject = new JSONObject(text);
                         if (jsonObject.has("data")) {
@@ -136,40 +127,6 @@ public class SamsungWebsocket {
 
 
     public void sendKey(String key, int times, String cmd) {
-        Request request = new Request.Builder().url(getUri(host, tokenFromServer)).build();
-        WebSocketListener webSocketListener = new WebSocketListener() {
-            @Override
-            public void onOpen(WebSocket webSocket, Response response) {
-                super.onOpen(webSocket, response);
-                Log.e("TV_COMMAND", "1onOpen");
-            }
-
-            @Override
-            public void onMessage(WebSocket webSocket, String text) {
-                super.onMessage(webSocket, text);
-            }
-
-            @Override
-            public void onMessage(WebSocket webSocket, ByteString bytes) {
-                super.onMessage(webSocket, bytes);
-            }
-
-            @Override
-            public void onClosing(WebSocket webSocket, int code, String reason) {
-                super.onClosing(webSocket, code, reason);
-            }
-
-            @Override
-            public void onClosed(WebSocket webSocket, int code, String reason) {
-                super.onClosed(webSocket, code, reason);
-            }
-
-            @Override
-            public void onFailure(WebSocket webSocket, Throwable t, Response response) {
-                super.onFailure(webSocket, t, response);
-            }
-        };
-        if (ws == null) ws = okHttpClient.newWebSocket(request, webSocketListener);
         cmd = cmd == null ? "Click" : cmd;
         String payload = Constants.payloadControl;
         payload = payload.replace("{{cmd}}", cmd);

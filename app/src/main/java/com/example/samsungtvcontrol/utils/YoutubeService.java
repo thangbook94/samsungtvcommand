@@ -39,7 +39,7 @@ public class YoutubeService {
 
         try {
             Response response = client.newCall(request).execute();
-            System.out.println("Response: "+response.toString());
+            System.out.println("Response: " + response.toString());
             if (response.isSuccessful() && response.body() != null) {
                 JSONObject jsonObject = new JSONObject(response.body().string());
                 if (jsonObject.has("results")) {
