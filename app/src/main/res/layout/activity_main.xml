@@ -11,37 +11,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
-
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button android:visibility="invisible" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content">
 
             <ImageButton
                 android:id="@+id/buttonpower"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_column="0"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/power1"
                 android:text="@string/power" />
 
             <ImageButton
                 android:id="@+id/buttonsource"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_column="2"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/source1"
                 android:text="@string/source" />
@@ -53,30 +45,30 @@
 
             <ImageButton
                 android:id="@+id/number1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number1"
                 android:text="@string/_1" />
 
             <ImageButton
                 android:id="@+id/number2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number2"
                 android:text="@string/_2" />
 
             <ImageButton
                 android:id="@+id/number3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number3"
                 android:text="@string/_3" />
@@ -88,30 +80,30 @@
 
             <ImageButton
                 android:id="@+id/number4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number4"
                 android:text="@string/_4" />
 
             <ImageButton
                 android:id="@+id/number5"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number5"
                 android:text="@string/_5" />
 
             <ImageButton
                 android:id="@+id/number6"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number6"
                 android:text="@string/_6" />
@@ -123,30 +115,30 @@
 
             <ImageButton
                 android:id="@+id/number7"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number7"
                 android:text="@string/_7" />
 
             <ImageButton
                 android:id="@+id/number8"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number8"
                 android:text="@string/_8" />
 
             <ImageButton
                 android:id="@+id/number9"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number9"
                 android:text="@string/_9" />
@@ -158,33 +150,33 @@
 
             <ImageButton
                 android:id="@+id/volup"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_column="0"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/chup1"
                 android:text="@string/vol_up" />
 
             <ImageButton
                 android:id="@+id/number0"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_column="1"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number0"
                 android:text="@string/_0" />
 
             <ImageButton
                 android:id="@+id/channelup"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_column="2"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/chup1"
                 android:text="@string/chn_up"
@@ -197,33 +189,33 @@
 
             <ImageButton
                 android:id="@+id/voldown"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_column="0"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/chdown1"
                 android:text="@string/vol_down" />
 
             <ImageButton
                 android:id="@+id/buttonup"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_column="1"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/up1"
                 android:text="@string/up" />
 
             <ImageButton
                 android:id="@+id/channeldown"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_column="2"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/chdown1"
                 android:text="@string/chn_down" />
@@ -235,10 +227,10 @@
 
             <ImageButton
                 android:id="@+id/buttonleft"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/left1"
                 android:text="@string/left" />
@@ -246,7 +238,7 @@
             <ImageButton
                 android:id="@+id/buttonok"
                 android:layout_width="54dp"
-                android:layout_height="50dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
@@ -255,10 +247,10 @@
 
             <ImageButton
                 android:id="@+id/buttonright"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/right1"
                 android:text="@string/right" />
@@ -270,22 +262,22 @@
 
             <ImageButton
                 android:id="@+id/buttondown"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_column="1"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/down1"
                 android:text="@string/down" />
 
             <ImageButton
                 android:id="@+id/buttonback"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_column="2"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/back1"
                 android:text="@string/back" />
@@ -297,31 +289,31 @@
 
             <ImageButton
                 android:id="@+id/buttonbrowser"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
+                android:layout_width="65dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/browser1"
                 android:text="@string/browser" />
 
             <ImageButton
                 android:id="@+id/buttonyoutube"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
+                android:layout_width="65dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/youtube2"
                 android:text="@string/youtube" />
 
             <ImageButton
                 android:id="@+id/buttonnetflix"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
+                android:layout_width="65dp"
+                android:layout_height="50dp"
                 android:layout_column="2"
                 android:layout_gravity="center"
-                android:adjustViewBounds="false"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/netflix4"
                 android:text="@string/netflix" />
@@ -338,12 +330,12 @@
 
             <ImageButton
                 android:id="@+id/button"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:adjustViewBounds="false"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_column="2"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/connect2"
-                android:layout_gravity="end"
                 android:text="@string/refresh" />
         </TableRow>
     </TableLayout>
