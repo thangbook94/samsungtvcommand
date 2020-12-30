@@ -59,26 +59,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
-
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
-
-        sharedPreferences = this.getSharedPreferences("tvSetting", Context.MODE_PRIVATE);
-        String ipShared = sharedPreferences.getString("ip", null);
-        System.out.println("IP: " + ip + " " + ipShared);
-        String nameShared = sharedPreferences.getString("name", null);
-        System.out.println("Name: " + name + " " + nameShared);
-        if (ipShared != null) {
-            ip = ipShared;
-        }
-        if (nameShared != null) {
-            name = nameShared;
-        }
-        if (name != null && ip != null) {
-            samsungWebsocket = new SamsungWebsocket(ip, name);
-        }
+        getSocketFromSharedRef();
         editText = findViewById(R.id.sendText);
         button = findViewById(R.id.button);
         editText.setEnabled(false);
@@ -246,6 +229,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void getSocketFromSharedRef() {
+        sharedPreferences = this.getSharedPreferences("tvSetting", Context.MODE_PRIVATE);
+        String ipShared = sharedPreferences.getString("ip", null);
+        System.out.println("IP: " + ip + " " + ipShared);
+        String nameShared = sharedPreferences.getString("name", null);
+        System.out.println("Name: " + name + " " + nameShared);
+        if (ipShared != null) {
+            ip = ipShared;
+        }
+        if (nameShared != null) {
+            name = nameShared;
+        }
+        if (name != null && ip != null) {
+            samsungWebsocket = new SamsungWebsocket(ip, name);
+        }
+    }
+
     private void promptSpeechInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -295,6 +295,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSocketFromSharedRef();
+    }
 
     @Override
     protected void onDestroy() {
