@@ -27,6 +27,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/power1"
+                android:contentDescription="@string/power"
                 android:text="@string/power" />
 
             <ImageButton
@@ -39,6 +40,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/source3"
+                android:contentDescription="@string/source"
                 android:text="@string/source" />
         </TableRow>
 
@@ -55,6 +57,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number1"
+                android:contentDescription="@string/_1"
                 android:text="@string/_1" />
 
             <ImageButton
@@ -66,6 +69,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number2"
+                android:contentDescription="@string/_2"
                 android:text="@string/_2" />
 
             <ImageButton
@@ -77,6 +81,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number3"
+                android:contentDescription="@string/_3"
                 android:text="@string/_3" />
         </TableRow>
 
@@ -93,6 +98,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number4"
+                android:contentDescription="@string/_4"
                 android:text="@string/_4" />
 
             <ImageButton
@@ -104,6 +110,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number5"
+                android:contentDescription="@string/_5"
                 android:text="@string/_5" />
 
             <ImageButton
@@ -115,6 +122,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number6"
+                android:contentDescription="@string/_6"
                 android:text="@string/_6" />
         </TableRow>
 
@@ -131,6 +139,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number7"
+                android:contentDescription="@string/_7"
                 android:text="@string/_7" />
 
             <ImageButton
@@ -142,6 +151,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number8"
+                android:contentDescription="@string/_8"
                 android:text="@string/_8" />
 
             <ImageButton
@@ -153,6 +163,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number9"
+                android:contentDescription="@string/_9"
                 android:text="@string/_9" />
         </TableRow>
 
@@ -167,9 +178,10 @@
                 android:layout_column="0"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/chup1"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/vol_up"
                 android:text="@string/vol_up" />
 
             <ImageButton
@@ -179,9 +191,10 @@
                 android:layout_column="1"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number0"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/_0"
                 android:text="@string/_0" />
 
             <ImageButton
@@ -191,11 +204,11 @@
                 android:layout_column="2"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/chup4"
-                android:background="#FFFFFF"
                 android:text="@string/chn_up"
-                tools:ignore="ContentDescription" />
+                android:contentDescription="@string/chn_up"/>
         </TableRow>
 
         <TableRow
@@ -209,9 +222,10 @@
                 android:layout_column="0"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/chdown1"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/vol_down"
                 android:text="@string/vol_down" />
 
             <ImageButton
@@ -221,9 +235,10 @@
                 android:layout_column="1"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/up1"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/up"
                 android:text="@string/up" />
 
             <ImageButton
@@ -233,9 +248,10 @@
                 android:layout_column="2"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/chdown4"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/chn_down"
                 android:text="@string/chn_down" />
         </TableRow>
 
@@ -249,9 +265,10 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/left1"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/left"
                 android:text="@string/left" />
 
             <ImageButton
@@ -260,9 +277,10 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/enter5"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/ok"
                 android:text="@string/ok" />
 
             <ImageButton
@@ -271,9 +289,10 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/right1"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/right"
                 android:text="@string/right" />
         </TableRow>
 
@@ -288,9 +307,10 @@
                 android:layout_column="1"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/down1"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/down"
                 android:text="@string/down" />
 
             <ImageButton
@@ -300,9 +320,10 @@
                 android:layout_column="2"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/back3"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/back"
                 android:text="@string/back" />
         </TableRow>
 
@@ -316,10 +337,11 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:padding="3dp"
-                android:src="@drawable/browser1"
                 android:background="#FFFFFF"
+                android:padding="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/browser1"
+                android:contentDescription="@string/browser"
                 android:text="@string/browser" />
 
             <ImageButton
@@ -328,9 +350,10 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/youtube2"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/youtube"
                 android:text="@string/youtube" />
 
             <ImageButton
@@ -340,9 +363,10 @@
                 android:layout_column="2"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/netflix4"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/netflix"
                 android:text="@string/netflix" />
         </TableRow>
 
@@ -353,6 +377,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_span="2"
+                android:inputType="text"
+                android:autofillHints="@string/hint"
                 android:hint="@string/hint" />
 
             <ImageButton
@@ -361,9 +387,10 @@
                 android:layout_height="50dp"
                 android:layout_column="2"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/connect2"
-                android:background="#FFFFFF"
+                android:contentDescription="@string/refresh"
                 android:text="@string/refresh" />
         </TableRow>
     </TableLayout>
