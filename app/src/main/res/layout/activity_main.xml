@@ -11,10 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
+
         <TableRow
             android:layout_width="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
 
             <ImageButton
                 android:id="@+id/buttonpower"
@@ -23,6 +24,7 @@
                 android:layout_column="0"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/power1"
                 android:text="@string/power" />
@@ -34,8 +36,9 @@
                 android:layout_column="2"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
-                android:src="@drawable/source1"
+                android:src="@drawable/source3"
                 android:text="@string/source" />
         </TableRow>
 
@@ -49,6 +52,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number1"
                 android:text="@string/_1" />
@@ -59,6 +63,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number2"
                 android:text="@string/_2" />
@@ -69,6 +74,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number3"
                 android:text="@string/_3" />
@@ -84,6 +90,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number4"
                 android:text="@string/_4" />
@@ -94,6 +101,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number5"
                 android:text="@string/_5" />
@@ -104,6 +112,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number6"
                 android:text="@string/_6" />
@@ -119,6 +128,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number7"
                 android:text="@string/_7" />
@@ -129,6 +139,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number8"
                 android:text="@string/_8" />
@@ -139,6 +150,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number9"
                 android:text="@string/_9" />
@@ -157,6 +169,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/chup1"
+                android:background="#FFFFFF"
                 android:text="@string/vol_up" />
 
             <ImageButton
@@ -168,6 +181,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/number0"
+                android:background="#FFFFFF"
                 android:text="@string/_0" />
 
             <ImageButton
@@ -178,7 +192,8 @@
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/chup1"
+                android:src="@drawable/chup4"
+                android:background="#FFFFFF"
                 android:text="@string/chn_up"
                 tools:ignore="ContentDescription" />
         </TableRow>
@@ -196,6 +211,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/chdown1"
+                android:background="#FFFFFF"
                 android:text="@string/vol_down" />
 
             <ImageButton
@@ -207,6 +223,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/up1"
+                android:background="#FFFFFF"
                 android:text="@string/up" />
 
             <ImageButton
@@ -217,7 +234,8 @@
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/chdown1"
+                android:src="@drawable/chdown4"
+                android:background="#FFFFFF"
                 android:text="@string/chn_down" />
         </TableRow>
 
@@ -233,6 +251,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/left1"
+                android:background="#FFFFFF"
                 android:text="@string/left" />
 
             <ImageButton
@@ -242,7 +261,8 @@
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/enter3"
+                android:src="@drawable/enter5"
+                android:background="#FFFFFF"
                 android:text="@string/ok" />
 
             <ImageButton
@@ -253,6 +273,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/right1"
+                android:background="#FFFFFF"
                 android:text="@string/right" />
         </TableRow>
 
@@ -269,6 +290,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/down1"
+                android:background="#FFFFFF"
                 android:text="@string/down" />
 
             <ImageButton
@@ -279,7 +301,8 @@
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/back1"
+                android:src="@drawable/back3"
+                android:background="#FFFFFF"
                 android:text="@string/back" />
         </TableRow>
 
@@ -294,7 +317,9 @@
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
+                android:padding="3dp"
                 android:src="@drawable/browser1"
+                android:background="#FFFFFF"
                 android:text="@string/browser" />
 
             <ImageButton
@@ -305,6 +330,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/youtube2"
+                android:background="#FFFFFF"
                 android:text="@string/youtube" />
 
             <ImageButton
@@ -316,6 +342,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/netflix4"
+                android:background="#FFFFFF"
                 android:text="@string/netflix" />
         </TableRow>
 
@@ -336,6 +363,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/connect2"
+                android:background="#FFFFFF"
                 android:text="@string/refresh" />
         </TableRow>
     </TableLayout>
