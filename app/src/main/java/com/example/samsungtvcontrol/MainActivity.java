@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -39,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     String ip;
     String name;
-    Button button;
-    Button number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
-    Button buttonUp, buttonRigh, buttonLeft, buttonDown, buttonOk;
-    Button power, source;
-    Button netflix, youtube, browser;
-    Button chup, chdown, volup, voldown;
-    Button buttonback;
+    ImageButton button;
+    ImageButton number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
+    ImageButton buttonUp, buttonRigh, buttonLeft, buttonDown, buttonOk;
+    ImageButton power, source;
+    ImageButton netflix, youtube, browser;
+    ImageButton chup, chdown, volup, voldown;
+    ImageButton buttonback;
     SamsungWebsocket samsungWebsocket;
     SharedPreferences sharedPreferences;
     private List<Map<String, String>> mDeviceInfos = new ArrayList<>();
