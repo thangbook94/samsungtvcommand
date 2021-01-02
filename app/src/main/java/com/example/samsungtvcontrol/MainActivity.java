@@ -5,6 +5,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -19,11 +21,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.samsungtvcontrol.tvcommand.SearchListener;
 import com.example.samsungtvcontrol.constants.Constant;
 import com.example.samsungtvcontrol.constants.Keycode;
 import com.example.samsungtvcontrol.entity.SamsungWebsocket;
 import com.example.samsungtvcontrol.services.YoutubeService;
+import com.example.samsungtvcontrol.tvcommand.SearchListener;
 import com.samsung.multiscreen.Search;
 import com.samsung.multiscreen.Service;
 
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     String ip;
     String name;
-    ImageButton button;
+    ImageButton refresh;
     ImageButton number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
     ImageButton buttonUp, buttonRigh, buttonLeft, buttonDown, buttonOk;
     ImageButton power, source;
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         getSocketFromSharedRef();
         editText = findViewById(R.id.sendText);
-        button = findViewById(R.id.button);
+        refresh = findViewById(R.id.button);
         editText.setEnabled(false);
         editText.setClickable(false);
         editText.setOnClickListener(view -> promptSpeechInput());
@@ -224,7 +226,16 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_2,
                 new String[]{"name", "type"},
                 new int[]{android.R.id.text1, android.R.id.text2});
-        button.setOnClickListener(v -> CreateSearchTvDialog()
+        refresh.setOnClickListener(v -> {
+                    ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                    if (mWifi.isConnected()) {
+                        CreateSearchTvDialog();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please connect wifi to use this feature", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
         );
 
     }
