@@ -20,10 +20,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.samsungtvcontrol.tvcommand.SearchListener;
-import com.example.samsungtvcontrol.utils.Constants;
-import com.example.samsungtvcontrol.utils.Keycode;
-import com.example.samsungtvcontrol.utils.SamsungWebsocket;
-import com.example.samsungtvcontrol.utils.YoutubeService;
+import com.example.samsungtvcontrol.constants.Constant;
+import com.example.samsungtvcontrol.constants.Keycode;
+import com.example.samsungtvcontrol.entity.SamsungWebsocket;
+import com.example.samsungtvcontrol.services.YoutubeService;
 import com.samsung.multiscreen.Search;
 import com.samsung.multiscreen.Service;
 
@@ -94,127 +94,127 @@ public class MainActivity extends AppCompatActivity {
         buttonback = findViewById(R.id.buttonback);
         number0.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_0.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_0.toString(), 1, Constant.CLICK);
             }
         });
         number1.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_1.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_1.toString(), 1, Constant.CLICK);
             }
         });
         number2.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_2.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_2.toString(), 1, Constant.CLICK);
             }
         });
         number3.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_3.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_3.toString(), 1, Constant.CLICK);
             }
         });
         number4.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_4.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_4.toString(), 1, Constant.CLICK);
             }
         });
         number5.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_5.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_5.toString(), 1, Constant.CLICK);
             }
         });
         number6.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_6.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_6.toString(), 1, Constant.CLICK);
             }
         });
         number7.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_7.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_7.toString(), 1, Constant.CLICK);
             }
         });
         number8.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_8.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_8.toString(), 1, Constant.CLICK);
             }
         });
         number9.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_9.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_9.toString(), 1, Constant.CLICK);
             }
         });
         buttonUp.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_UP.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_UP.toString(), 1, Constant.CLICK);
             }
         });
         buttonDown.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_DOWN.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_DOWN.toString(), 1, Constant.CLICK);
             }
         });
         buttonLeft.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_LEFT.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_LEFT.toString(), 1, Constant.CLICK);
             }
         });
         buttonRigh.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_RIGHT.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_RIGHT.toString(), 1, Constant.CLICK);
             }
         });
         buttonOk.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_ENTER.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_ENTER.toString(), 1, Constant.CLICK);
             }
         });
         power.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_POWER.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_POWER.toString(), 1, Constant.CLICK);
             }
         });
         source.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_SOURCE.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_SOURCE.toString(), 1, Constant.CLICK);
             }
         });
         youtube.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.runApp(Constants.mapApp.get(Constants.YOUTUBE), Constants.DEEP_LINK, "");
+                samsungWebsocket.runApp(Constant.mapApp.get(Constant.YOUTUBE), Constant.DEEP_LINK, "");
             }
         });
         netflix.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.runApp(Constants.mapApp.get(Constants.NETFLIX), Constants.DEEP_LINK, "");
+                samsungWebsocket.runApp(Constant.mapApp.get(Constant.NETFLIX), Constant.DEEP_LINK, "");
             }
         });
         browser.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.runApp(Constants.mapApp.get(Constants.BROWSER), Constants.DEEP_LINK, "");
+                samsungWebsocket.runApp(Constant.mapApp.get(Constant.BROWSER), Constant.DEEP_LINK, "");
             }
         });
         chup.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_CHUP.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_CHUP.toString(), 1, Constant.CLICK);
             }
         });
         chdown.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_CHDOWN.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_CHDOWN.toString(), 1, Constant.CLICK);
             }
         });
         volup.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_VOLUP.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_VOLUP.toString(), 1, Constant.CLICK);
             }
         });
         voldown.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_VOLDOWN.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_VOLDOWN.toString(), 1, Constant.CLICK);
             }
         });
         buttonback.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
-                samsungWebsocket.sendKey(Keycode.KEY_RETURN.toString(), 1, Constants.CLICK);
+                samsungWebsocket.sendKey(Keycode.KEY_RETURN.toString(), 1, Constant.CLICK);
             }
         });
 

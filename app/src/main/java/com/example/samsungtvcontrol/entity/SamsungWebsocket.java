@@ -1,7 +1,9 @@
-package com.example.samsungtvcontrol.utils;
+package com.example.samsungtvcontrol.entity;
 
 import android.util.Base64;
 import android.util.Log;
+
+import com.example.samsungtvcontrol.constants.Constant;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -116,7 +118,7 @@ public class SamsungWebsocket {
     }
 
     public String getUri(String host, String token) {
-        String uri = Constants.SSL_URI;
+        String uri = Constant.SSL_URI;
         uri = uri.replace("{{host}}", host);
 //        uri = uri.replace("{{name}}", encodeBase64String(name));
         if (token == null)
@@ -128,7 +130,7 @@ public class SamsungWebsocket {
 
     public void sendKey(String key, int times, String cmd) {
         cmd = cmd == null ? "Click" : cmd;
-        String payload = Constants.payloadControl;
+        String payload = Constant.payloadControl;
         payload = payload.replace("{{cmd}}", cmd);
         payload = payload.replace("{{DataOfCmd}}", key);
         for (int i = 0; i < times; i++) {
@@ -143,7 +145,7 @@ public class SamsungWebsocket {
     }
 
     public void moveCursor(int x, int y, int duration) {
-        String payload = Constants.payloadCursor;
+        String payload = Constant.payloadCursor;
         payload = payload.replace("{{x}}", x + "");
         payload = payload.replace("{{y}}", y + "");
         payload = payload.replace("{{duration}}", duration + "");
@@ -151,9 +153,9 @@ public class SamsungWebsocket {
     }
 
     public void runApp(String appId, String appType, String metaTag) {
-        appType = appType == null ? Constants.DEEP_LINK : appType;
+        appType = appType == null ? Constant.DEEP_LINK : appType;
         metaTag = metaTag == null ? "" : metaTag;
-        String payload = Constants.payloadRunapp;
+        String payload = Constant.payloadRunapp;
         payload = payload.replace("{{appId}}", appId);
         payload = payload.replace("{{action_type}}", appType);
         payload = payload.replace("{{metaTag}}", metaTag);
@@ -162,12 +164,12 @@ public class SamsungWebsocket {
     }
 
     public void openBrowser(String url) {
-        runApp(Constants.mapApp.get("Browser"), Constants.NATIVE_LAUNCH, url);
+        runApp(Constant.mapApp.get("Browser"), Constant.NATIVE_LAUNCH, url);
     }
 
     //chac la khong chay duoc
     public void appList() {
-        String payload = Constants.payloadAppList;
+        String payload = Constant.payloadAppList;
         ws.send(payload);
     }
 }

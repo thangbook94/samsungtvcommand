@@ -1,4 +1,8 @@
-package com.example.samsungtvcontrol.utils;
+package com.example.samsungtvcontrol.services;
+
+import com.example.samsungtvcontrol.constants.Constant;
+import com.example.samsungtvcontrol.constants.Keycode;
+import com.example.samsungtvcontrol.entity.SamsungWebsocket;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +23,7 @@ public class YoutubeService {
         if (result.isEmpty() || result.size() == 0) {
             return;
         }
-        samsungWebsocket.runApp(Constants.mapApp.get("Youtube"), Constants.DEEP_LINK, Constants.YOUTUBE_WATCH_PREFIX + result.get(0));
+        samsungWebsocket.runApp(Constant.mapApp.get("Youtube"), Constant.DEEP_LINK, Constant.YOUTUBE_WATCH_PREFIX + result.get(0));
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {

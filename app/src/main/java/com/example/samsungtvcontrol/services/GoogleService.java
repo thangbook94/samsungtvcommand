@@ -1,4 +1,6 @@
-package com.example.samsungtvcontrol.utils;
+package com.example.samsungtvcontrol.services;
+
+import com.example.samsungtvcontrol.entity.SamsungWebsocket;
 
 import org.json.JSONArray;
 import org.json.JSONException;

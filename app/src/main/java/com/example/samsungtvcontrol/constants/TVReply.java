@@ -1,4 +1,4 @@
-package com.example.samsungtvcontrol.utils;
+package com.example.samsungtvcontrol.constants;
 
 public enum TVReply {
     /**
