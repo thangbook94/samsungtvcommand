@@ -274,7 +274,7 @@
             <ImageButton
                 android:id="@+id/buttonok"
                 android:layout_width="54dp"
-                android:layout_height="65dp"
+                android:layout_height="54dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
 
