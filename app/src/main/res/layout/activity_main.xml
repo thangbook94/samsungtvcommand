@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
 
     <TableLayout
@@ -277,10 +277,11 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+
                 android:background="#FFFFFF"
                 android:contentDescription="@string/ok"
                 android:scaleType="fitCenter"
-                android:src="@drawable/enter5"
+                android:src="@drawable/enter7"
                 android:text="@string/ok" />
 
             <ImageButton
