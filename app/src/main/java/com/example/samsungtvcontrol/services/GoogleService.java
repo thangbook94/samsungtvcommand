@@ -25,7 +25,6 @@ public class GoogleService {
 
     public static List<String> getResult(String search) {
         List<String> re = new ArrayList<>();
-        OkHttpClient okHttpClient = new OkHttpClient();
         OkHttpClient client = new OkHttpClient();
         search = search.replace("\\s+", "+");
         String URL = "https://google-search3.p.rapidapi.com/api/v1/search/q={{SEARCH}}&num=10&lr=lang_vi";

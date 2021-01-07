@@ -144,11 +144,11 @@ public class SamsungWebsocket {
         sendKey(key, 1, "Release");
     }
 
-    public void moveCursor(int x, int y, int duration) {
+    public void moveCursor(int x, int y, String duration) {
         String payload = Constant.payloadCursor;
         payload = payload.replace("{{x}}", x + "");
         payload = payload.replace("{{y}}", y + "");
-        payload = payload.replace("{{duration}}", duration + "");
+        payload = payload.replace("{{duration}}", duration);
         ws.send(payload);
     }
 
