@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     String ip;
     String name;
-    Button b3;
-    EditText abc;
     ImageButton refresh;
     ImageButton number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
     ImageButton buttonUp, buttonRigh, buttonLeft, buttonDown, buttonOk;
@@ -251,18 +249,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
         );
-//        abc = findViewById(R.id.editTextTextPersonName2);
-//        b3 = findViewById(R.id.button3);
-//        b3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String a = abc.getText().toString();
-//                String[] x = a.trim().split("\\s+");
-//                System.out.println(Arrays.toString(x));
-//                samsungWebsocket.moveCursor(Integer.parseInt(x[0]), Integer.parseInt(x[1]), "0");
-//            }
-//        });
-
     }
 
     private void getSocketFromSharedRef() {
@@ -397,7 +383,7 @@ public class MainActivity extends AppCompatActivity {
 //                        mMediaRouter.removeCallback(mMediaRouterCallback);
                     //Save Service
                     String cName = mDeviceList.get(which).getClass().getName();
-                    Service service = (Service) mDeviceList.get(which);
+                    Service service = mDeviceList.get(which);
                     Uri uri = service.getUri();
                     ip = uri.getHost();
                     editText.setEnabled(true);
