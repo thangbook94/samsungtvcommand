@@ -6,6 +6,7 @@
     android:orientation="horizontal"
     tools:context=".MainActivity">
 
+
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -302,6 +303,19 @@
             android:layout_height="wrap_content">
 
             <ImageButton
+                android:id="@+id/tvinfo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_column="0"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:contentDescription="@string/info"
+                android:scaleType="fitCenter"
+                android:src="@drawable/info3"
+                android:text="@string/info" />
+
+            <ImageButton
                 android:id="@+id/buttondown"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
@@ -404,5 +418,25 @@
                 android:text="@string/refresh" />
         </TableRow>
     </TableLayout>
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal">-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/button3"-->
+    <!--            android:layout_width="51dp"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:text="Button" />-->
+    <!--    </LinearLayout>-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/editTextTextPersonName2"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:ems="10"-->
+    <!--        android:inputType="textPersonName" />-->
 
 </LinearLayout>

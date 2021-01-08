@@ -14,6 +14,7 @@ import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SimpleAdapter;
@@ -21,28 +22,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.samsungtvcontrol.adapter.DeviceAdapter;
 import com.example.samsungtvcontrol.constants.Constant;
 import com.example.samsungtvcontrol.constants.Keycode;
 import com.example.samsungtvcontrol.entity.SamsungWebsocket;
 import com.example.samsungtvcontrol.services.YoutubeService;
-import com.example.samsungtvcontrol.tvcommand.SearchListener;
 import com.samsung.multiscreen.Search;
 import com.samsung.multiscreen.Service;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static Search search;
@@ -56,13 +49,12 @@ public class MainActivity extends AppCompatActivity {
     ImageButton power, source;
     ImageButton netflix, youtube, browser;
     ImageButton chup, chdown, volup, voldown;
-    ImageButton buttonback;
+    ImageButton buttonback, info;
     SamsungWebsocket samsungWebsocket;
     SharedPreferences sharedPreferences;
     private List<Map<String, String>> mDeviceInfos = new ArrayList<>();
-    private SearchListener searchListener;
-    private String TAG = "Command-Samsung-Tv";
-    private ArrayList mDeviceList = new ArrayList();
+    private final String TAG = "Command-Samsung-Tv";
+    private ArrayList<Service> mDeviceList = new ArrayList<>();
     private SimpleAdapter mTVListAdapter;
 
     @Override
@@ -103,6 +95,17 @@ public class MainActivity extends AppCompatActivity {
         voldown = findViewById(R.id.voldown);
         volup = findViewById(R.id.volup);
         buttonback = findViewById(R.id.buttonback);
+        info = findViewById(R.id.tvinfo);
+        info.setOnClickListener(view -> {
+            AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this)
+                    .setCancelable(false)
+                    .setTitle("Device Info")
+                    .setAdapter(new DeviceAdapter(mDeviceList, MainActivity.this), null)
+                    .setPositiveButton("OK", (dialog, id) -> {
+                        dialog.cancel();
+                    });
+            ad.show();
+        });
         number0.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
                 samsungWebsocket.sendKey(Keycode.KEY_0.toString(), 1, Constant.CLICK);
@@ -352,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "menu_search : " + search);
 
         search.setOnServiceFoundListener(
-                service -> {
+                (Service service) -> {
                     Log.d(TAG, "Search.onFound() service : " + service.toString());
                     if (!mDeviceList.contains(service)) {
                         mDeviceList.add(service);
@@ -392,6 +395,9 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("ip", ip);
                     editor.putString("name", name);
+                    editor.putString("version", service.getVersion());
+                    editor.putString("uuid", service.getId());
+                    editor.putString("last_connect", new Timestamp(System.currentTimeMillis()).toString());
                     editor.apply();
                     samsungWebsocket = new SamsungWebsocket(ip, name);
                     System.out.println(service.toString());
