@@ -13,9 +13,11 @@ import android.os.StrictMode;
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.Window;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +41,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private static Search search;
     private final int REQ_CODE_SPEECH_INPUT = 100;
-    EditText editText;
+    TextView editText;
     String ip;
     String name;
     ImageButton refresh;
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "Command-Samsung-Tv";
     private ArrayList<Service> mDeviceList = new ArrayList<>();
     private SimpleAdapter mTVListAdapter;
+    Button custom1, custom2, custom3, custom4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        getSocketFromSharedRef();
         editText = findViewById(R.id.sendText);
         refresh = findViewById(R.id.button);
         editText.setEnabled(false);
@@ -95,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
         volup = findViewById(R.id.volup);
         buttonback = findViewById(R.id.buttonback);
         info = findViewById(R.id.tvinfo);
+        custom1 = findViewById(R.id.custom1);
+        custom2 = findViewById(R.id.custom2);
+        custom3 = findViewById(R.id.custom3);
+        custom4 = findViewById(R.id.custom4);
+        getFromSharedRef();
         info.setOnClickListener(view -> {
             AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this)
                     .setCancelable(false)
@@ -230,6 +237,118 @@ public class MainActivity extends AppCompatActivity {
                 samsungWebsocket.sendKey(Keycode.KEY_RETURN.toString(), 1, Constant.CLICK);
             }
         });
+        custom1.setOnClickListener(view -> {
+            if (samsungWebsocket != null) {
+                samsungWebsocket.sendKey("KEY_" + custom1.getText().toString(), 1, Constant.CLICK);
+            }
+        });
+        custom1.setOnLongClickListener(view -> {
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setTitle("Custom button");
+
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+            for (Keycode k : Keycode.values()) {
+                if (k.toString().length() < 10) arrayAdapter.add(k.toString());
+            }
+
+            builderSingle.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
+
+            builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {
+                String strName = arrayAdapter.getItem(which);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("custom1", strName);
+                edit.apply();
+                custom1.setText(strName.replace("KEY_", ""));
+
+            });
+            builderSingle.show();
+            return true;
+        });
+        custom2.setOnClickListener(view -> {
+            if (samsungWebsocket != null) {
+                samsungWebsocket.sendKey("KEY_" + custom2.getText().toString(), 1, Constant.CLICK);
+            }
+        });
+        custom2.setOnLongClickListener(view -> {
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setTitle("Custom button");
+
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+            for (Keycode k : Keycode.values()) {
+                if (k.toString().length() < 10) arrayAdapter.add(k.toString());
+            }
+
+            builderSingle.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
+
+            builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {
+                String strName = arrayAdapter.getItem(which);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("custom2", strName);
+                edit.apply();
+                custom2.setText(strName.replace("KEY_", ""));
+
+            });
+            builderSingle.show();
+            return true;
+        });
+        custom3.setOnClickListener(view -> {
+            if (samsungWebsocket != null) {
+                samsungWebsocket.sendKey("KEY_" + custom3.getText().toString(), 1, Constant.CLICK);
+            }
+        });
+        custom3.setOnLongClickListener(view -> {
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setTitle("Custom button");
+
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+            for (Keycode k : Keycode.values()) {
+                if (k.toString().length() < 10) arrayAdapter.add(k.toString());
+            }
+
+            builderSingle.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
+
+            builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {
+                String strName = arrayAdapter.getItem(which);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("custom1", strName);
+                edit.apply();
+                custom3.setText(strName.replace("KEY_", ""));
+
+            });
+            builderSingle.show();
+            return true;
+        });
+        custom4.setOnClickListener(view -> {
+            if (samsungWebsocket != null) {
+                samsungWebsocket.sendKey("KEY_" + custom4.getText().toString(), 1, Constant.CLICK);
+            }
+        });
+        custom4.setOnLongClickListener(view -> {
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setTitle("Custom button");
+
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+            for (Keycode k : Keycode.values()) {
+                if (k.toString().length() < 10) arrayAdapter.add(k.toString());
+            }
+
+            builderSingle.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
+
+            builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {
+                String strName = arrayAdapter.getItem(which);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("custom4", strName);
+                edit.apply();
+                custom4.setText(strName.replace("KEY_", ""));
+
+            });
+            builderSingle.show();
+            return true;
+        });
 
         mTVListAdapter = new SimpleAdapter(
                 this,
@@ -250,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    private void getSocketFromSharedRef() {
+    private void getFromSharedRef() {
         sharedPreferences = this.getSharedPreferences("tvSetting", Context.MODE_PRIVATE);
         String ipShared = sharedPreferences.getString("ip", null);
         System.out.println("IP: " + ip + " " + ipShared);
@@ -265,6 +384,14 @@ public class MainActivity extends AppCompatActivity {
         if (name != null && ip != null) {
             samsungWebsocket = new SamsungWebsocket(ip, name);
         }
+        String c1 = sharedPreferences.getString("custom1", null);
+        if (c1 != null) custom1.setText(c1.replace("KEY_", ""));
+        String c2 = sharedPreferences.getString("custom2", null);
+        if (c2 != null) custom2.setText(c2.replace("KEY_", ""));
+        String c3 = sharedPreferences.getString("custom3", null);
+        if (c3 != null) custom3.setText(c3.replace("KEY_", ""));
+        String c4 = sharedPreferences.getString("custom4", null);
+        if (c4 != null) custom4.setText(c4.replace("KEY_", ""));
     }
 
     private void promptSpeechInput() {
@@ -337,7 +464,7 @@ public class MainActivity extends AppCompatActivity {
         switch (label) {
             case 0: {
                 String timeString = text.replaceAll("\\D+", "");
-                timeString=timeString.trim();
+                timeString = timeString.trim();
                 int time = timeString.length() > 0 ? Integer.parseInt(timeString) : 1;
                 if (text.toLowerCase().contains("tăng")) {
                     samsungWebsocket.sendKey(Keycode.KEY_VOLUP.toString(), time, Constant.CLICK);
@@ -374,7 +501,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getSocketFromSharedRef();
+        getFromSharedRef();
     }
 
     @Override

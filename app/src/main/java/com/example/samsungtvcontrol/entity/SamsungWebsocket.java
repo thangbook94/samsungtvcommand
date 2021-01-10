@@ -131,11 +131,17 @@ public class SamsungWebsocket {
 
     public void sendKey(String key, int times, String cmd) {
         cmd = cmd == null ? "Click" : cmd;
+        System.out.println("Send key " + key + " time " + times + " " + cmd);
         String payload = Constant.payloadControl;
         payload = payload.replace("{{cmd}}", cmd);
         payload = payload.replace("{{DataOfCmd}}", key);
         for (int i = 0; i < times; i++) {
             ws.send(payload);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
