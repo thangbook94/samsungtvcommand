@@ -12,9 +12,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.speech.RecognizerIntent;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SimpleAdapter;
@@ -26,6 +24,7 @@ import com.example.samsungtvcontrol.adapter.DeviceAdapter;
 import com.example.samsungtvcontrol.constants.Constant;
 import com.example.samsungtvcontrol.constants.Keycode;
 import com.example.samsungtvcontrol.entity.SamsungWebsocket;
+import com.example.samsungtvcontrol.services.GoogleService;
 import com.example.samsungtvcontrol.services.YoutubeService;
 import com.samsung.multiscreen.Search;
 import com.samsung.multiscreen.Service;
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     String name;
     ImageButton refresh;
     ImageButton number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
-    ImageButton buttonUp, buttonRigh, buttonLeft, buttonDown, buttonOk;
+    ImageButton buttonUp, buttonRight, buttonLeft, buttonDown, buttonOk;
     ImageButton power, source;
     ImageButton netflix, youtube, browser;
     ImageButton chup, chdown, volup, voldown;
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         buttonUp = findViewById(R.id.buttonup);
         buttonDown = findViewById(R.id.buttondown);
         buttonLeft = findViewById(R.id.buttonleft);
-        buttonRigh = findViewById(R.id.buttonright);
+        buttonRight = findViewById(R.id.buttonright);
         buttonOk = findViewById(R.id.buttonok);
         power = findViewById(R.id.buttonpower);
         source = findViewById(R.id.buttonsource);
@@ -171,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 samsungWebsocket.sendKey(Keycode.KEY_LEFT.toString(), 1, Constant.CLICK);
             }
         });
-        buttonRigh.setOnClickListener(view -> {
+        buttonRight.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
                 samsungWebsocket.sendKey(Keycode.KEY_RIGHT.toString(), 1, Constant.CLICK);
             }
@@ -293,21 +292,37 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    final String text = result.get(0);
-                    editText.setText(text);
-                    editText.setGravity(Gravity.CENTER);
-//                    samsungWebsocket.runApp(Constants.mapApp.get("Youtube"), Constants.DEEP_LINK, Constants.YOUTUBE_WATCH_PREFIX + "vTJdVE_gjI0");
-//                    samsungWebsocket.sendKey(Keycode.KEY_ENTER.toString(), 1, "Click");
-                    YoutubeService.openVideo(samsungWebsocket, text);
-//                    GoogleService.searchAndOpen(samsungWebsocket, "Di ve nha");
+                    String text = result.get(0);
+//                    editText.setText(text);
+//                    editText.setGravity(Gravity.CENTER);
+                    int re = 2;
+                    if (text.toLowerCase().contains("youtube")) {
+                        re = 1;
+                    } else if (text.contains("âm lượng")) {
+                        re = 0;
+                    } else if (text.contains("kênh")) {
+                        re = 3;
+                    }
+                    text = text.replace("mở", "");
+                    text = text.replace("Mở", "");
+                    text = text.replace("Trên", "");
+                    text = text.replace("Tìm kiếm", "");
+                    text = text.replace("tìm kiếm", "");
+                    processResponse(re, text);
 //                    OkHttpClient client = new OkHttpClient();
+//                    RequestBody rb = new FormBody.Builder().add("sentence", text).build();
 //                    Request request = new Request.Builder()
-//                            .url("localhost:5000/execute-text").addHeader("Text", text)
+//                            .url("http://192.168.1.179:5000/").post(rb)
 //                            .build();
 //                    try {
 //                        Response response = client.newCall(request).execute();
+//                        System.out.println("RESPONSE " + Objects.requireNonNull(response.body()).toString());
+//                        JSONObject jsonObject = new JSONObject(response.body().string());
+//                        int re = Integer.parseInt(jsonObject.getString("result"));
+//                        String textRe = jsonObject.getString("text");
+//                        processResponse(re, textRe);
 //                        //todo viet them xu ly o day
-//                    } catch (IOException e) {
+//                    } catch (IOException | JSONException e) {
 //                        e.printStackTrace();
 //                    }
                 }
@@ -317,6 +332,44 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void processResponse(int label, String text) {
+        System.out.println("XXXXXXXXXX begin process " + label + " " + text);
+        switch (label) {
+            case 0: {
+                String timeString = text.replaceAll("\\D+", "");
+                timeString=timeString.trim();
+                int time = timeString.length() > 0 ? Integer.parseInt(timeString) : 1;
+                if (text.toLowerCase().contains("tăng")) {
+                    samsungWebsocket.sendKey(Keycode.KEY_VOLUP.toString(), time, Constant.CLICK);
+                } else if (text.toLowerCase().contains("giảm")) {
+                    samsungWebsocket.sendKey(Keycode.KEY_VOLDOWN.toString(), time, Constant.CLICK);
+                }
+                break;
+            }
+            case 1: {
+                if (text.toLowerCase().equals("mở youtube")) {
+                    samsungWebsocket.runApp(Constant.mapApp.get(Constant.YOUTUBE), Constant.DEEP_LINK, "");
+                } else {
+                    YoutubeService.openVideo(samsungWebsocket, text);
+                }
+                break;
+            }
+            case 2: {
+                GoogleService.searchAndOpen(samsungWebsocket, text);
+                break;
+            }
+            case 3: {
+                String chString = text.replaceAll("\\D+", "");
+                chString = chString.replaceAll("\\s+", "");
+                int ch = chString.length() > 0 ? Integer.parseInt(chString) : -1;
+                if (ch != -1) {
+                    samsungWebsocket.openChannel(ch);
+                }
+                break;
+            }
+
+        }
+    }
 
     @Override
     protected void onResume() {

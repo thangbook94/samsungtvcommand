@@ -281,7 +281,7 @@
                 android:background="#FFFFFF"
                 android:contentDescription="@string/ok"
                 android:scaleType="fitCenter"
-                android:src="@drawable/enter5"
+                android:src="@drawable/enter7"
                 android:text="@string/ok" />
 
             <ImageButton
