@@ -10,15 +10,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.samsungtvcontrol.R;
-import com.samsung.multiscreen.Service;
+import com.example.samsungtvcontrol.entity.TvInfoDetail;
 
 import java.util.List;
 
 public class DeviceAdapter extends BaseAdapter {
-    List<Service> serviceList;
+    List<TvInfoDetail> serviceList;
     Activity activity;
 
-    public DeviceAdapter(List<Service> serviceList, Activity activity) {
+    public DeviceAdapter(List<TvInfoDetail> serviceList, Activity activity) {
         this.serviceList = serviceList;
         this.activity = activity;
     }
@@ -54,7 +54,7 @@ public class DeviceAdapter extends BaseAdapter {
         name.setTypeface(Typeface.DEFAULT_BOLD);
         version.setText(String.format("Version: %s", serviceList.get(position).getVersion()));
         type.setText(String.format("Type: %s", serviceList.get(position).getType()));
-        uri.setText(String.format("IP: %s", serviceList.get(position).getUri().getHost()));
+        uri.setText(String.format("IP: %s", serviceList.get(position).getIp()));
         if (position % 2 == 0) {
             convertView.setBackgroundColor(Color.parseColor("#CBF38C"));
         } else {

@@ -26,6 +26,7 @@ import com.example.samsungtvcontrol.adapter.DeviceAdapter;
 import com.example.samsungtvcontrol.constants.Constant;
 import com.example.samsungtvcontrol.constants.Keycode;
 import com.example.samsungtvcontrol.entity.SamsungWebsocket;
+import com.example.samsungtvcontrol.entity.TvInfoDetail;
 import com.example.samsungtvcontrol.services.GoogleService;
 import com.example.samsungtvcontrol.services.YoutubeService;
 import com.samsung.multiscreen.Search;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Map<String, String>> mDeviceInfos = new ArrayList<>();
     private final String TAG = "Command-Samsung-Tv";
     private ArrayList<Service> mDeviceList = new ArrayList<>();
+    private ArrayList<TvInfoDetail> mInfoList = new ArrayList<>();
     private SimpleAdapter mTVListAdapter;
     Button custom1, custom2, custom3, custom4;
 
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this)
                     .setCancelable(false)
                     .setTitle("Device Info")
-                    .setAdapter(new DeviceAdapter(mDeviceList, MainActivity.this), null)
+                    .setAdapter(new DeviceAdapter(mInfoList, MainActivity.this), null)
                     .setPositiveButton("OK", (dialog, id) -> {
                         dialog.cancel();
                     });
@@ -244,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
         });
         custom1.setOnLongClickListener(view -> {
             AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
-            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setIcon(R.drawable.connect2);
             builderSingle.setTitle("Custom button");
 
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
@@ -272,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
         });
         custom2.setOnLongClickListener(view -> {
             AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
-            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setIcon(R.drawable.connect2);
             builderSingle.setTitle("Custom button");
 
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
@@ -300,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
         });
         custom3.setOnLongClickListener(view -> {
             AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
-            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setIcon(R.drawable.connect2);
             builderSingle.setTitle("Custom button");
 
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
@@ -328,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
         });
         custom4.setOnLongClickListener(view -> {
             AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
-            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setIcon(R.drawable.connect2);
             builderSingle.setTitle("Custom button");
 
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
@@ -392,6 +394,23 @@ public class MainActivity extends AppCompatActivity {
         if (c3 != null) custom3.setText(c3.replace("KEY_", ""));
         String c4 = sharedPreferences.getString("custom4", null);
         if (c4 != null) custom4.setText(c4.replace("KEY_", ""));
+
+        String ip = sharedPreferences.getString("ip", null);
+        String name = sharedPreferences.getString("name", null);
+        String version = sharedPreferences.getString("version", null);
+        String uuid = sharedPreferences.getString("uuid", null);
+        if (ip != null && name != null && version != null && uuid != null) {
+            if (mInfoList == null || mDeviceList.size() == 0) {
+                TvInfoDetail tvInfoDetail = TvInfoDetail.builder()
+                        .uuid(uuid)
+                        .ip(ip)
+                        .version(version)
+                        .name(name)
+                        .build();
+                mInfoList.add(tvInfoDetail);
+            }
+        }
+
     }
 
     private void promptSpeechInput() {
@@ -576,6 +595,12 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("uuid", service.getId());
                     editor.putString("last_connect", new Timestamp(System.currentTimeMillis()).toString());
                     editor.apply();
+                    mInfoList.add(TvInfoDetail.builder()
+                            .name(service.getName())
+                            .version(service.getVersion())
+                            .uuid(service.getId())
+                            .type(service.getType())
+                            .build());
                     samsungWebsocket = new SamsungWebsocket(ip, name);
                     System.out.println(service.toString());
                     Log.d(TAG, "cName : " + cName);

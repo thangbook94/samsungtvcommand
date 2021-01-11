@@ -22,4 +22,6 @@ public class TvInfoDetail {
     private String uuid;
     private String version;
     private Timestamp last_connect;
+    private String name;
+    private String type;
 }
