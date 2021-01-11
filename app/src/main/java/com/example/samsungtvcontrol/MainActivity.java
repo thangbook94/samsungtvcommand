@@ -12,11 +12,12 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.speech.RecognizerIntent;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Window;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,35 +26,27 @@ import com.example.samsungtvcontrol.adapter.DeviceAdapter;
 import com.example.samsungtvcontrol.constants.Constant;
 import com.example.samsungtvcontrol.constants.Keycode;
 import com.example.samsungtvcontrol.entity.SamsungWebsocket;
+import com.example.samsungtvcontrol.services.GoogleService;
 import com.example.samsungtvcontrol.services.YoutubeService;
 import com.samsung.multiscreen.Search;
 import com.samsung.multiscreen.Service;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static Search search;
     private final int REQ_CODE_SPEECH_INPUT = 100;
-    EditText editText;
+    TextView editText;
     String ip;
     String name;
     ImageButton refresh;
     ImageButton number0, number1, number2, number3, number4, number5, number6, number7, number8, number9;
-    ImageButton buttonUp, buttonRigh, buttonLeft, buttonDown, buttonOk;
+    ImageButton buttonUp, buttonRight, buttonLeft, buttonDown, buttonOk;
     ImageButton power, source;
     ImageButton netflix, youtube, browser;
     ImageButton chup, chdown, volup, voldown;
@@ -64,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "Command-Samsung-Tv";
     private ArrayList<Service> mDeviceList = new ArrayList<>();
     private SimpleAdapter mTVListAdapter;
+    Button custom1, custom2, custom3, custom4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        getSocketFromSharedRef();
         editText = findViewById(R.id.sendText);
         refresh = findViewById(R.id.button);
         editText.setEnabled(false);
@@ -91,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         buttonUp = findViewById(R.id.buttonup);
         buttonDown = findViewById(R.id.buttondown);
         buttonLeft = findViewById(R.id.buttonleft);
-        buttonRigh = findViewById(R.id.buttonright);
+        buttonRight = findViewById(R.id.buttonright);
         buttonOk = findViewById(R.id.buttonok);
         power = findViewById(R.id.buttonpower);
         source = findViewById(R.id.buttonsource);
@@ -104,12 +97,19 @@ public class MainActivity extends AppCompatActivity {
         volup = findViewById(R.id.volup);
         buttonback = findViewById(R.id.buttonback);
         info = findViewById(R.id.tvinfo);
+        custom1 = findViewById(R.id.custom1);
+        custom2 = findViewById(R.id.custom2);
+        custom3 = findViewById(R.id.custom3);
+        custom4 = findViewById(R.id.custom4);
+        getFromSharedRef();
         info.setOnClickListener(view -> {
             AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this)
                     .setCancelable(false)
                     .setTitle("Device Info")
                     .setAdapter(new DeviceAdapter(mDeviceList, MainActivity.this), null)
-                    .setPositiveButton("OK", (dialog, id) -> dialog.cancel());
+                    .setPositiveButton("OK", (dialog, id) -> {
+                        dialog.cancel();
+                    });
             ad.show();
         });
         number0.setOnClickListener(view -> {
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 samsungWebsocket.sendKey(Keycode.KEY_LEFT.toString(), 1, Constant.CLICK);
             }
         });
-        buttonRigh.setOnClickListener(view -> {
+        buttonRight.setOnClickListener(view -> {
             if (samsungWebsocket != null) {
                 samsungWebsocket.sendKey(Keycode.KEY_RIGHT.toString(), 1, Constant.CLICK);
             }
@@ -237,6 +237,118 @@ public class MainActivity extends AppCompatActivity {
                 samsungWebsocket.sendKey(Keycode.KEY_RETURN.toString(), 1, Constant.CLICK);
             }
         });
+        custom1.setOnClickListener(view -> {
+            if (samsungWebsocket != null) {
+                samsungWebsocket.sendKey("KEY_" + custom1.getText().toString(), 1, Constant.CLICK);
+            }
+        });
+        custom1.setOnLongClickListener(view -> {
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setTitle("Custom button");
+
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+            for (Keycode k : Keycode.values()) {
+                if (k.toString().length() < 10) arrayAdapter.add(k.toString());
+            }
+
+            builderSingle.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
+
+            builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {
+                String strName = arrayAdapter.getItem(which);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("custom1", strName);
+                edit.apply();
+                custom1.setText(strName.replace("KEY_", ""));
+
+            });
+            builderSingle.show();
+            return true;
+        });
+        custom2.setOnClickListener(view -> {
+            if (samsungWebsocket != null) {
+                samsungWebsocket.sendKey("KEY_" + custom2.getText().toString(), 1, Constant.CLICK);
+            }
+        });
+        custom2.setOnLongClickListener(view -> {
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setTitle("Custom button");
+
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+            for (Keycode k : Keycode.values()) {
+                if (k.toString().length() < 10) arrayAdapter.add(k.toString());
+            }
+
+            builderSingle.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
+
+            builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {
+                String strName = arrayAdapter.getItem(which);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("custom2", strName);
+                edit.apply();
+                custom2.setText(strName.replace("KEY_", ""));
+
+            });
+            builderSingle.show();
+            return true;
+        });
+        custom3.setOnClickListener(view -> {
+            if (samsungWebsocket != null) {
+                samsungWebsocket.sendKey("KEY_" + custom3.getText().toString(), 1, Constant.CLICK);
+            }
+        });
+        custom3.setOnLongClickListener(view -> {
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setTitle("Custom button");
+
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+            for (Keycode k : Keycode.values()) {
+                if (k.toString().length() < 10) arrayAdapter.add(k.toString());
+            }
+
+            builderSingle.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
+
+            builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {
+                String strName = arrayAdapter.getItem(which);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("custom1", strName);
+                edit.apply();
+                custom3.setText(strName.replace("KEY_", ""));
+
+            });
+            builderSingle.show();
+            return true;
+        });
+        custom4.setOnClickListener(view -> {
+            if (samsungWebsocket != null) {
+                samsungWebsocket.sendKey("KEY_" + custom4.getText().toString(), 1, Constant.CLICK);
+            }
+        });
+        custom4.setOnLongClickListener(view -> {
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+            builderSingle.setIcon(R.drawable.ic_launcher);
+            builderSingle.setTitle("Custom button");
+
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+            for (Keycode k : Keycode.values()) {
+                if (k.toString().length() < 10) arrayAdapter.add(k.toString());
+            }
+
+            builderSingle.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
+
+            builderSingle.setAdapter(arrayAdapter, (dialog, which) -> {
+                String strName = arrayAdapter.getItem(which);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putString("custom4", strName);
+                edit.apply();
+                custom4.setText(strName.replace("KEY_", ""));
+
+            });
+            builderSingle.show();
+            return true;
+        });
 
         mTVListAdapter = new SimpleAdapter(
                 this,
@@ -255,10 +367,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }
         );
-
     }
 
-    private void getSocketFromSharedRef() {
+    private void getFromSharedRef() {
         sharedPreferences = this.getSharedPreferences("tvSetting", Context.MODE_PRIVATE);
         String ipShared = sharedPreferences.getString("ip", null);
         System.out.println("IP: " + ip + " " + ipShared);
@@ -273,6 +384,14 @@ public class MainActivity extends AppCompatActivity {
         if (name != null && ip != null) {
             samsungWebsocket = new SamsungWebsocket(ip, name);
         }
+        String c1 = sharedPreferences.getString("custom1", null);
+        if (c1 != null) custom1.setText(c1.replace("KEY_", ""));
+        String c2 = sharedPreferences.getString("custom2", null);
+        if (c2 != null) custom2.setText(c2.replace("KEY_", ""));
+        String c3 = sharedPreferences.getString("custom3", null);
+        if (c3 != null) custom3.setText(c3.replace("KEY_", ""));
+        String c4 = sharedPreferences.getString("custom4", null);
+        if (c4 != null) custom4.setText(c4.replace("KEY_", ""));
     }
 
     private void promptSpeechInput() {
@@ -300,25 +419,39 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    final String text = result.get(0);
-                    editText.setText(text);
-                    editText.setGravity(Gravity.CENTER);
-//                    samsungWebsocket.runApp(Constants.mapApp.get("Youtube"), Constants.DEEP_LINK, Constants.YOUTUBE_WATCH_PREFIX + "vTJdVE_gjI0");
-//                    samsungWebsocket.sendKey(Keycode.KEY_ENTER.toString(), 1, "Click");
-                    YoutubeService.openVideo(samsungWebsocket, text);
-//                    GoogleService.searchAndOpen(samsungWebsocket, "Di ve nha");
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url("localhost:5000/execute-text").addHeader("Text", text)
-                            .build();
-                    try {
-                        Response response = client.newCall(request).execute();
-                        String responseString = Objects.requireNonNull(response.body()).string();
-                        JSONObject jsonObject = new JSONObject(responseString);
-                        //todo viet them xu ly o day
-                    } catch (IOException | JSONException e) {
-                        e.printStackTrace();
+                    String text = result.get(0);
+//                    editText.setText(text);
+//                    editText.setGravity(Gravity.CENTER);
+                    int re = 2;
+                    if (text.toLowerCase().contains("youtube")) {
+                        re = 1;
+                    } else if (text.contains("âm lượng")) {
+                        re = 0;
+                    } else if (text.contains("kênh")) {
+                        re = 3;
                     }
+                    text = text.replace("mở", "");
+                    text = text.replace("Mở", "");
+                    text = text.replace("Trên", "");
+                    text = text.replace("Tìm kiếm", "");
+                    text = text.replace("tìm kiếm", "");
+                    processResponse(re, text);
+//                    OkHttpClient client = new OkHttpClient();
+//                    RequestBody rb = new FormBody.Builder().add("sentence", text).build();
+//                    Request request = new Request.Builder()
+//                            .url("http://192.168.1.179:5000/").post(rb)
+//                            .build();
+//                    try {
+//                        Response response = client.newCall(request).execute();
+//                        System.out.println("RESPONSE " + Objects.requireNonNull(response.body()).toString());
+//                        JSONObject jsonObject = new JSONObject(response.body().string());
+//                        int re = Integer.parseInt(jsonObject.getString("result"));
+//                        String textRe = jsonObject.getString("text");
+//                        processResponse(re, textRe);
+//                        //todo viet them xu ly o day
+//                    } catch (IOException | JSONException e) {
+//                        e.printStackTrace();
+//                    }
                 }
                 break;
             }
@@ -326,11 +459,49 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void processResponse(int label, String text) {
+        System.out.println("XXXXXXXXXX begin process " + label + " " + text);
+        switch (label) {
+            case 0: {
+                String timeString = text.replaceAll("\\D+", "");
+                timeString = timeString.trim();
+                int time = timeString.length() > 0 ? Integer.parseInt(timeString) : 1;
+                if (text.toLowerCase().contains("tăng")) {
+                    samsungWebsocket.sendKey(Keycode.KEY_VOLUP.toString(), time, Constant.CLICK);
+                } else if (text.toLowerCase().contains("giảm")) {
+                    samsungWebsocket.sendKey(Keycode.KEY_VOLDOWN.toString(), time, Constant.CLICK);
+                }
+                break;
+            }
+            case 1: {
+                if (text.toLowerCase().equals("mở youtube")) {
+                    samsungWebsocket.runApp(Constant.mapApp.get(Constant.YOUTUBE), Constant.DEEP_LINK, "");
+                } else {
+                    YoutubeService.openVideo(samsungWebsocket, text);
+                }
+                break;
+            }
+            case 2: {
+                GoogleService.searchAndOpen(samsungWebsocket, text);
+                break;
+            }
+            case 3: {
+                String chString = text.replaceAll("\\D+", "");
+                chString = chString.replaceAll("\\s+", "");
+                int ch = chString.length() > 0 ? Integer.parseInt(chString) : -1;
+                if (ch != -1) {
+                    samsungWebsocket.openChannel(ch);
+                }
+                break;
+            }
+
+        }
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getSocketFromSharedRef();
+        getFromSharedRef();
     }
 
     @Override
@@ -392,7 +563,7 @@ public class MainActivity extends AppCompatActivity {
 //                        mMediaRouter.removeCallback(mMediaRouterCallback);
                     //Save Service
                     String cName = mDeviceList.get(which).getClass().getName();
-                    Service service = (Service) mDeviceList.get(which);
+                    Service service = mDeviceList.get(which);
                     Uri uri = service.getUri();
                     ip = uri.getHost();
                     editText.setEnabled(true);

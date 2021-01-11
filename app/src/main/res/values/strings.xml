@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SamsungTv Control</string>
+    <string name="app_name">TV Command</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Tv command</string>
     <string name="action_refresh">Refresh</string>

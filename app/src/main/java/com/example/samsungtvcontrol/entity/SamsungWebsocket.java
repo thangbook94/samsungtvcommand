@@ -4,6 +4,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.example.samsungtvcontrol.constants.Constant;
+import com.example.samsungtvcontrol.constants.Keycode;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -130,11 +131,56 @@ public class SamsungWebsocket {
 
     public void sendKey(String key, int times, String cmd) {
         cmd = cmd == null ? "Click" : cmd;
+        System.out.println("Send key " + key + " time " + times + " " + cmd);
         String payload = Constant.payloadControl;
         payload = payload.replace("{{cmd}}", cmd);
         payload = payload.replace("{{DataOfCmd}}", key);
         for (int i = 0; i < times; i++) {
             ws.send(payload);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void openChannel(int ch) {
+        String chS = ch + "";
+        for (int i = 0; i < chS.length(); i++) {
+            int t = Integer.parseInt(chS.charAt(i) + "");
+            switch (t) {
+                case 0:
+                    sendKey(Keycode.KEY_0.toString(), 1, Constant.CLICK);
+                    break;
+                case 1:
+                    sendKey(Keycode.KEY_1.toString(), 1, Constant.CLICK);
+                    break;
+                case 2:
+                    sendKey(Keycode.KEY_2.toString(), 1, Constant.CLICK);
+                    break;
+                case 3:
+                    sendKey(Keycode.KEY_3.toString(), 1, Constant.CLICK);
+                    break;
+                case 4:
+                    sendKey(Keycode.KEY_4.toString(), 1, Constant.CLICK);
+                    break;
+                case 5:
+                    sendKey(Keycode.KEY_5.toString(), 1, Constant.CLICK);
+                    break;
+                case 6:
+                    sendKey(Keycode.KEY_6.toString(), 1, Constant.CLICK);
+                    break;
+                case 7:
+                    sendKey(Keycode.KEY_7.toString(), 1, Constant.CLICK);
+                    break;
+                case 8:
+                    sendKey(Keycode.KEY_8.toString(), 1, Constant.CLICK);
+                    break;
+                case 9:
+                    sendKey(Keycode.KEY_9.toString(), 1, Constant.CLICK);
+                    break;
+            }
         }
     }
 
