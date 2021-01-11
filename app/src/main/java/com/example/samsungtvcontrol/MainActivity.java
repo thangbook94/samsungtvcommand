@@ -14,7 +14,6 @@ import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SimpleAdapter;
@@ -30,12 +29,21 @@ import com.example.samsungtvcontrol.services.YoutubeService;
 import com.samsung.multiscreen.Search;
 import com.samsung.multiscreen.Service;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static Search search;
@@ -101,9 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     .setCancelable(false)
                     .setTitle("Device Info")
                     .setAdapter(new DeviceAdapter(mDeviceList, MainActivity.this), null)
-                    .setPositiveButton("OK", (dialog, id) -> {
-                        dialog.cancel();
-                    });
+                    .setPositiveButton("OK", (dialog, id) -> dialog.cancel());
             ad.show();
         });
         number0.setOnClickListener(view -> {
@@ -308,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         Response response = client.newCall(request).execute();
                         String responseString = Objects.requireNonNull(response.body()).string();
-                        JSONObject jsonObject=new JSONObject(responseString);
+                        JSONObject jsonObject = new JSONObject(responseString);
                         //todo viet them xu ly o day
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
